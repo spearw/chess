@@ -67,10 +67,10 @@ class ChessGame
         
 
         until @xhash.include?(@current_x) && @yhash.include?(@current_y) && @board[@xhash.find_index(@current_x)][@yhash.find_index(@current_y)] != ""
-            puts 'which row?'
-            @current_x = gets.chomp
-            puts 'which column?'
+            puts 'which column? (a-h)'
             @current_y = gets.chomp.downcase
+            puts 'which row? (1-8)'
+            @current_x = gets.chomp
             if @xhash.include?(@current_x) && @yhash.include?(@current_y)
                 if @board[@xhash.find_index(@current_x)][@yhash.find_index(@current_y)] == ""
                     puts "nothing there"
@@ -85,12 +85,21 @@ class ChessGame
 
     def move_piece(piece)   
 
-        puts "moving #{piece.name}."
-        puts 'which row?'
-        new_x = gets.chomp
-        puts 'which column?'
-        new_y = gets.chomp.downcase
-        puts 'Invalid entry' unless @xhash.include?(@current_x) && @yhash.include?(@current_y)
+        new_x = ''
+        new_y = ''
+
+        
+
+        until @xhash.include?(new_x) && @yhash.include?(new_y)
+            puts "moving #{piece.name}"
+            puts 'which column? (a-h)'
+            new_y = gets.chomp.downcase
+            puts 'which row? (1-8)'
+            new_x = gets.chomp
+        
+            puts 'Invalid entry' unless @xhash.include?(new_x) && @yhash.include?(new_y)
+
+        end
 
 
         return false if invalid_move?
