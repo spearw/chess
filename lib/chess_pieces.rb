@@ -3,11 +3,10 @@
 
 class Piece
 
-    attr_accessor :is_white, :name, :symbol
+    attr_accessor :is_white, :symbol
 
     def initialize(white)
         @is_white = white
-        @name = 'Piece'
         @symbol = "\u2713"
     end
 
@@ -18,8 +17,10 @@ end
 class Knight < Piece
 
     attr_accessor :name
-
-    @name = 'Knight'
+    
+    def name
+        @name = 'Knight'
+    end
 
     def symbol
         if is_white
@@ -35,7 +36,9 @@ class Pawn < Piece
 
     attr_accessor :name
     
-    @name = 'Pawn'
+    def name
+        @name = 'Pawn'
+    end
 
     def symbol
         if is_white
@@ -51,7 +54,9 @@ class Rook < Piece
 
     attr_accessor :name
 
-    @name = 'Rook'
+    def name
+        @name = 'Rook'
+    end
 
     def symbol
         if is_white
@@ -66,7 +71,9 @@ class Bishop < Piece
 
     attr_accessor :name
 
-    @name = 'Bishop'
+    def name
+        @name = 'Bishop'
+    end
 
     def symbol
         if is_white
@@ -81,7 +88,9 @@ class King < Piece
 
     attr_accessor :name
 
-    @name = 'King'
+    def name
+        @name = 'King'
+    end
 
     def symbol
         if is_white
@@ -96,7 +105,9 @@ class Queen < Piece
 
     attr_accessor :name
 
-    @name = 'Queen'
+    def name
+        @name = 'Queen'
+    end
 
     def symbol
         if is_white

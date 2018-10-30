@@ -137,11 +137,43 @@ class ChessGame
     end
 
     def create_white_pieces
-        @board[0][0] = Piece.new(true)
-        @board[0][1] = Knight.new(true)
+        @board[7][0] = Rook.new(true)
+        @board[7][7] = Rook.new(true)
+        @board[7][1] = Knight.new(true)
+        @board[7][6] = Knight.new(true)
+        @board[7][2] = Bishop.new(true)
+        @board[7][5] = Bishop.new(true)
+        @board[7][3] = Queen.new(true)
+        @board[7][4] = King.new(true)
+
+        @board[6][0] = Pawn.new(true)
+        @board[6][1] = Pawn.new(true)
+        @board[6][2] = Pawn.new(true)
+        @board[6][3] = Pawn.new(true)
+        @board[6][4] = Pawn.new(true)
+        @board[6][5] = Pawn.new(true)
+        @board[6][6] = Pawn.new(true)
+        @board[6][7] = Pawn.new(true)
     end
 
     def create_black_pieces
+        @board[0][0] = Rook.new(false)
+        @board[0][7] = Rook.new(false)
+        @board[0][1] = Knight.new(false)
+        @board[0][6] = Knight.new(false)
+        @board[0][2] = Bishop.new(false)
+        @board[0][5] = Bishop.new(false)
+        @board[0][3] = Queen.new(false)
+        @board[0][4] = King.new(false)
+
+        @board[1][0] = Pawn.new(false)
+        @board[1][1] = Pawn.new(false)
+        @board[1][2] = Pawn.new(false)
+        @board[1][3] = Pawn.new(false)
+        @board[1][4] = Pawn.new(false)
+        @board[1][5] = Pawn.new(false)
+        @board[1][6] = Pawn.new(false)
+        @board[1][7] = Pawn.new(false)
     end
 
 end
