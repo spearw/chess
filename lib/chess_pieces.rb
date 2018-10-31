@@ -11,6 +11,10 @@ class Piece
         @has_moved = false
     end
 
+    def has_moved
+        @has_moved = true
+    end
+
 
 
 end
@@ -79,12 +83,10 @@ class Pawn < Piece
 
             if is_white == true
                 if current_y == new_y && ((current_x - new_x) == -1 || (current_x - new_x) == -2)
-                    @has_moved = true
                     return true
                 end
             elsif is_white == false
                 if current_y == new_y && ((current_x - new_x) == 1 || (current_x - new_x) == 2)
-                    @has_moved = true
                     return true
                 end
             end
@@ -92,12 +94,10 @@ class Pawn < Piece
 
         if is_white == true
             if current_y == new_y && (current_x - new_x) == -1
-                @has_moved = true
                 return true
             end
         elsif is_white == false
             if current_y == new_y && (current_x - new_x) == 1
-                @has_moved = true
                 return true
             end
         end

@@ -102,8 +102,32 @@ class ChessGame
         end
 
         #add pathfinding between two points - if path is occupied by piece
+        #I think i'll do this by calculating the squares it'll move through and checking them one by one
+        
 
-        #puts @board[@yhash.find_index(@current_y)..@board[@yhash.find_index(new_y)]
+        unless pathfinding(new_x, new_y)
+            puts "Piece in the way"
+            move_piece(piece)
+            return
+        end
+
+        #unless xrange == nil
+        #    xrange.each do |i|
+        #        puts i + 1 unless i == xrange.max
+        #    end
+        #end
+
+        #unless yrange == nil
+        #    yrange.each do |i| 
+        #        puts i + 1 unless i == yrange.max
+        #    end
+        #end
+
+
+
+        #@yhash.find_index(new_y) @yhash.find_index(@current_y)
+
+        #puts "| #{@board[@yhash.find_index(@current_y)..@yhash.find_index(new_y)]}|"
         #puts @board[@xhash.find_index(@current_x)..@board[@xhash.find_index(new_x)]
 
         #differentiate landing on enemy piece vs allied piece
@@ -111,7 +135,7 @@ class ChessGame
             if @board[@xhash.find_index(new_x)][@yhash.find_index(new_y)].is_white == piece.is_white
                 puts "same color"
                 move_piece(piece)
-                #need exit here
+                return
             else
                 puts "taking piece"
             end
@@ -122,12 +146,14 @@ class ChessGame
             puts "#{piece.name} to #{new_y}#{new_x}"
             @board[@xhash.find_index(new_x)][@yhash.find_index(new_y)] = piece
             @board[@xhash.find_index(@current_x)][@yhash.find_index(@current_y)] = ''
+            piece.has_moved
         else
             puts "Invalid move. Try again."
             move_piece(piece)
         end
 
     end
+
 
     def move
 
@@ -139,6 +165,45 @@ class ChessGame
 
         #checks to see if the move is valid
         #moves the piece
+    end
+
+    def pathfinding(new_x, new_y)
+
+        xrange = (@xhash.find_index(@current_x)..@xhash.find_index(new_x)).to_a if @xhash.find_index(@current_x) < @xhash.find_index(new_x)
+        xrange = (@xhash.find_index(new_x)..@xhash.find_index(@current_x)).to_a.reverse if @xhash.find_index(@current_x) > @xhash.find_index(new_x)
+
+        yrange = (@yhash.find_index(@current_y)..@yhash.find_index(new_y)).to_a if @yhash.find_index(@current_y) < @yhash.find_index(new_y)
+        yrange = (@yhash.find_index(new_y)..@yhash.find_index(@current_y)).to_a.reverse if @yhash.find_index(@current_y) > @yhash.find_index(new_y)
+
+        path = []
+
+        if yrange == nil
+            #vertical
+            xrange.each do |i| 
+                path << @board[i][@yhash.find_index(@current_y)]
+            end
+        elsif xrange == nil
+            #horizontal
+            yrange.each do |i| 
+                path << @board[@xhash.find_index(@current_x)][i]
+            end
+        else
+            #diagonal
+            xrange.each_with_index do |data, i|
+                path << @board[data][yrange[i]]
+            end
+        end
+
+
+        shifting out starting square and ending square
+        path.shift
+        path.pop
+        
+        path.each do |data|
+            if data != ''
+                return false
+            end
+        end
     end
 
     
