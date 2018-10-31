@@ -105,10 +105,12 @@ class ChessGame
         #I think i'll do this by calculating the squares it'll move through and checking them one by one
         
 
-        unless pathfinding(new_x, new_y)
-            puts "Piece in the way"
-            move_piece(piece)
-            return
+        unless piece.name == "Knight"
+            unless pathfinding(new_x, new_y)
+                puts "Piece in the way"
+                move_piece(piece)
+                return
+            end
         end
 
         #unless xrange == nil
@@ -195,10 +197,10 @@ class ChessGame
         end
 
 
-        shifting out starting square and ending square
+        #shifting out starting square and ending square
         path.shift
         path.pop
-        
+
         path.each do |data|
             if data != ''
                 return false
