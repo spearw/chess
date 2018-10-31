@@ -8,6 +8,7 @@ class Piece
     def initialize(white)
         @is_white = white
         @symbol = "\u2713"
+        @has_moved = false
     end
 
 
@@ -63,6 +64,49 @@ class Pawn < Piece
         else
             @symbol = "\u265F"
         end
+    end
+
+    #still need to add two spaces at start should add has_moved variable. 
+    #Can use that for king/rook castle too
+    def valid_move?(current_x, current_y, new_x, new_y)
+
+        if current_x == new_x && current_y == new_y
+            puts "Can't stay in place!"
+            return false
+        end
+
+        puts "has moved == #{@has_moved}"
+
+        unless @has_moved
+
+            if is_white == true
+                if current_y == new_y && ((current_x - new_x) == -1 || (current_x - new_x) == -2)
+                    @has_moved = true
+                    return true
+                end
+            elsif is_white == false
+                if current_y == new_y && ((current_x - new_x) == 1 || (current_x - new_x) == 2)
+                    @has_moved = true
+                    return true
+                end
+            end
+        end
+
+        if is_white == true
+            if current_y == new_y && (current_x - new_x) == -1
+                @has_moved = true
+                return true
+            end
+        elsif is_white == false
+            if current_y == new_y && (current_x - new_x) == 1
+                @has_moved = true
+                return true
+            end
+        end
+
+        return false
+        
+
     end
 
 end
