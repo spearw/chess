@@ -30,6 +30,23 @@ class Knight < Piece
         end
     end
 
+    def valid_move?(current_x, current_y, new_x, new_y)
+
+        if current_x == new_x && current_y == new_y
+            puts "Can't stay in place!"
+            return false
+        end
+
+        if (current_x - new_x).abs == 1 && (current_y - new_y).abs == 2 || (current_x - new_x).abs == 2 && (current_y - new_y).abs == 1
+            return true
+        end
+
+
+        return false
+
+    end
+
+
 end
 
 class Pawn < Piece

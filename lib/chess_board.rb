@@ -101,6 +101,10 @@ class ChessGame
 
         end
 
+        #add pathfinding between two points - if path is occupied by piece
+
+        #add piece taking - don't allow it piece it's landing on is same color
+
 
         if piece.valid_move?(@current_x.to_i, @yhash.find_index(@current_y).to_i, new_x.to_i, @yhash.find_index(new_y).to_i)
             puts "#{piece.name} to #{new_y}#{new_x}"
