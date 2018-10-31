@@ -91,7 +91,7 @@ class ChessGame
         
 
         until @xhash.include?(new_x) && @yhash.include?(new_y)
-            puts "moving #{piece.name}"
+            puts "#{piece.name} at #{@current_y}#{@current_x} selected"
             puts 'which column? (a-h)'
             new_y = gets.chomp.downcase
             puts 'which row? (1-8)'
@@ -102,9 +102,14 @@ class ChessGame
         end
 
 
-        return false if invalid_move?
-        @board[@xhash.find_index(new_x)][@yhash.find_index(new_y)] = piece
-        @board[@xhash.find_index(@current_x)][@yhash.find_index(@current_y)] = ''
+        if piece.valid_move?(@current_x.to_i, @yhash.find_index(@current_y).to_i, new_x.to_i, @yhash.find_index(new_y).to_i)
+            puts "#{piece.name} to #{new_y}#{new_x}"
+            @board[@xhash.find_index(new_x)][@yhash.find_index(new_y)] = piece
+            @board[@xhash.find_index(@current_x)][@yhash.find_index(@current_y)] = ''
+        else
+            puts "Invalid move. Try again."
+            move_piece(piece)
+        end
 
     end
 

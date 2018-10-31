@@ -65,6 +65,22 @@ class Rook < Piece
             @symbol = "\u265C"
         end
     end
+
+    def valid_move?(current_x, current_y, new_x, new_y)
+
+        if current_x == new_x && current_y == new_y
+            puts "Can't stay in place!"
+            return false
+        end
+
+        if current_x != new_x && current_y != new_y
+            return false
+        end
+
+
+        return true
+
+    end
 end
 
 class Bishop < Piece
@@ -81,6 +97,21 @@ class Bishop < Piece
         else
             @symbol = "\u265D"
         end
+    end
+
+    def valid_move?(current_x, current_y, new_x, new_y)
+
+        if current_x == new_x && current_y == new_y
+            puts "Can't stay in place!"
+            return false
+        end
+
+        if (current_x - new_x).abs == (current_y - new_y).abs
+            return true
+        end
+
+        return false
+
     end
 end
 
@@ -99,6 +130,21 @@ class King < Piece
             @symbol = "\u265A"
         end
     end
+
+    def valid_move?(current_x, current_y, new_x, new_y)
+
+        if current_x == new_x && current_y == new_y
+            puts "Can't stay in place!"
+            return false
+        end
+
+        if (current_x - new_x).abs > 1 || (current_y - new_y).abs >1
+            return false
+        end
+
+        return true
+
+    end
 end
 
 class Queen < Piece
@@ -116,4 +162,24 @@ class Queen < Piece
             @symbol = "\u265B"
         end
     end
+
+    def valid_move?(current_x, current_y, new_x, new_y)
+
+        if current_x == new_x && current_y == new_y
+            puts "Can't stay in place!"
+            return false
+        end
+
+        if (current_x.to_i - new_x).abs == (current_y.to_i - new_y).abs
+            return true
+        end
+
+        if current_x != new_x && current_y != new_y
+            return false
+        end
+
+        return true
+
+    end
+
 end
