@@ -66,8 +66,6 @@ class Pawn < Piece
         end
     end
 
-    #still need to add two spaces at start should add has_moved variable. 
-    #Can use that for king/rook castle too
     def valid_move?(current_x, current_y, new_x, new_y)
 
         if current_x == new_x && current_y == new_y

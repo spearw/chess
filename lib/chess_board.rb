@@ -103,7 +103,19 @@ class ChessGame
 
         #add pathfinding between two points - if path is occupied by piece
 
-        #add piece taking - don't allow it piece it's landing on is same color
+        #puts @board[@yhash.find_index(@current_y)..@board[@yhash.find_index(new_y)]
+        #puts @board[@xhash.find_index(@current_x)..@board[@xhash.find_index(new_x)]
+
+        #differentiate landing on enemy piece vs allied piece
+        if @board[@xhash.find_index(new_x)][@yhash.find_index(new_y)] != ""
+            if @board[@xhash.find_index(new_x)][@yhash.find_index(new_y)].is_white == piece.is_white
+                puts "same color"
+                move_piece(piece)
+                #need exit here
+            else
+                puts "taking piece"
+            end
+        end
 
 
         if piece.valid_move?(@current_x.to_i, @yhash.find_index(@current_y).to_i, new_x.to_i, @yhash.find_index(new_y).to_i)
