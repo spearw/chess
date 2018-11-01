@@ -77,8 +77,6 @@ class Pawn < Piece
             return false
         end
 
-        puts "has moved == #{@has_moved}"
-
         unless @has_moved
 
             if is_white == true

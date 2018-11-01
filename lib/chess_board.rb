@@ -9,6 +9,7 @@ class ChessGame
         set_board
         @game_on = true
         create_pieces
+        @active_player_is_white = true
     end
 
     def set_board
@@ -52,8 +53,21 @@ class ChessGame
         elsif input == 'hi'
             puts 'hey'
         end
+
+        swap_turns
         #placeholder to avoid errors for now
         @check = true
+    end
+
+    def swap_turns
+
+        @active_player_is_white = !@active_player_is_white
+        if @active_player_is_white
+            puts "White turn"
+        else
+            puts "Black turn"
+        end
+
     end
 
     def invalid_move?
@@ -75,6 +89,10 @@ class ChessGame
             if @xhash.include?(@current_x) && @yhash.include?(@current_y)
                 if @board[@xhash.find_index(@current_x)][@yhash.find_index(@current_y)] == ""
                     puts "nothing there"
+                elsif @board[@xhash.find_index(@current_x)][@yhash.find_index(@current_y)].is_white != @active_player_is_white
+                    puts "not your piece!"
+                    @current_x = ""
+                    @current_y = ""
                 end
             else
             puts 'Invalid entry' 
