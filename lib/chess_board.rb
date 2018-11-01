@@ -64,7 +64,8 @@ class ChessGame
 
         @current_x = ""
         @current_y = ""
-        
+
+        puts "Selecting a piece."
 
         until @xhash.include?(@current_x) && @yhash.include?(@current_y) && @board[@xhash.find_index(@current_x)][@yhash.find_index(@current_y)] != ""
             puts 'which column? (a-h)'
@@ -92,10 +93,12 @@ class ChessGame
 
         until @xhash.include?(new_x) && @yhash.include?(new_y)
             puts "#{piece.name} at #{@current_y}#{@current_x} selected"
-            puts 'which column? (a-h)'
+            puts 'move to what column? (a-h)'
             new_y = gets.chomp.downcase
-            puts 'which row? (1-8)'
+            move && return if new_y == "back"
+            puts 'move to what row? (1-8)'
             new_x = gets.chomp
+            move && return if new_x == "back"
         
             puts 'Invalid entry' unless @xhash.include?(new_x) && @yhash.include?(new_y)
 
@@ -112,25 +115,6 @@ class ChessGame
                 return
             end
         end
-
-        #unless xrange == nil
-        #    xrange.each do |i|
-        #        puts i + 1 unless i == xrange.max
-        #    end
-        #end
-
-        #unless yrange == nil
-        #    yrange.each do |i| 
-        #        puts i + 1 unless i == yrange.max
-        #    end
-        #end
-
-
-
-        #@yhash.find_index(new_y) @yhash.find_index(@current_y)
-
-        #puts "| #{@board[@yhash.find_index(@current_y)..@yhash.find_index(new_y)]}|"
-        #puts @board[@xhash.find_index(@current_x)..@board[@xhash.find_index(new_x)]
 
         #differentiate landing on enemy piece vs allied piece
         if @board[@xhash.find_index(new_x)][@yhash.find_index(new_y)] != ""
@@ -165,6 +149,8 @@ class ChessGame
         piece = find_piece
         move_piece(piece)
 
+
+        #finds the piece
         #checks to see if the move is valid
         #moves the piece
     end
